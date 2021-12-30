@@ -5,6 +5,7 @@ package com.ieso.personapi.service;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.ieso.personapi.dto.PersonDTO;
 import com.ieso.personapi.dto.response.MessageResponseDTO;
 import com.ieso.personapi.entity.Person;
+import com.ieso.personapi.exception.PersonNotFounException;
 import com.ieso.personapi.mapper.PersonMapper;
 import com.ieso.personapi.repository.PersonRepository;
 
@@ -47,4 +49,15 @@ public class PersonService {
 				.map(personMapper::toDTO)
 				.collect(Collectors.toList());
 	}
+
+
+	public PersonDTO findById(Long id) throws PersonNotFounException {
+		Optional<Person> optionalPerson =  personRepository.findById(id);
+		if(optionalPerson.isEmpty()) {
+			throw new PersonNotFounException(id);
+		}
+		return personMapper.toDTO(optionalPerson.get());
+	}
+	
+	
 }

@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ieso.personapi.dto.PersonDTO;
 import com.ieso.personapi.dto.response.MessageResponseDTO;
+import com.ieso.personapi.exception.PersonNotFounException;
 import com.ieso.personapi.service.PersonService;
 
 import lombok.AllArgsConstructor;
@@ -44,4 +46,8 @@ public class PersonController {
 		return personService.listAll();
 	}
 
+	@GetMapping("/{id}")
+	public PersonDTO findById(@PathVariable Long id) throws PersonNotFounException {
+		return personService.findById(id);
+	}
 }
