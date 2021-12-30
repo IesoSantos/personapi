@@ -4,12 +4,12 @@
 package com.ieso.personapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ieso.personapi.dto.response.MessageResponseDTO;
 import com.ieso.personapi.entity.Person;
 import com.ieso.personapi.repository.PersonRepository;
 
@@ -31,9 +31,12 @@ public class PersonController {
 
 
 	@PostMapping
-	public String createPerson(@RequestBody Person person) {
+	public MessageResponseDTO createPerson(@RequestBody Person person) {
 		repository.save(person);
-		return "Api test";
+		return MessageResponseDTO
+				.builder()
+				.message("Create person with id: "+person.getId())
+				.build();
 	}
 
 }
