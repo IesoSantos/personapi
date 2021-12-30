@@ -5,8 +5,8 @@ package com.ieso.personapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import com.ieso.personapi.dto.PersonDTO;
 import com.ieso.personapi.dto.response.MessageResponseDTO;
 import com.ieso.personapi.entity.Person;
 import com.ieso.personapi.repository.PersonRepository;
@@ -24,11 +24,12 @@ public class PersonService {
 	@Autowired
 	private PersonRepository personRepository;
 	
-	public MessageResponseDTO createPerson(Person person) {
-		personRepository.save(person);
+	public MessageResponseDTO createPerson(PersonDTO personDTO) {
+		
+		personRepository.save(personDTO);
 		return MessageResponseDTO
 				.builder()
-				.message("Create person with id: "+person.getId())
+				.message("Create person with id: "+personDTO.getId())
 				.build();
 	}
 }
