@@ -3,12 +3,12 @@
  */
 package com.ieso.personapi.service;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.ieso.personapi.dto.PersonDTO;
 import com.ieso.personapi.dto.response.MessageResponseDTO;
@@ -40,7 +40,7 @@ public class PersonService {
 				.build();
 	}
 	
-	@GetMapping
+	
 	public List<PersonDTO> listAll(){
 		List<Person> allPeople = personRepository.findAll();
 		return allPeople.stream()
