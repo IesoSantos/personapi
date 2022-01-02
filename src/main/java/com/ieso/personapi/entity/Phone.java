@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.ieso.personapi.dto.PhoneDTO;
 import com.ieso.personapi.enums.PhoneType;
 
 import lombok.AllArgsConstructor;
@@ -38,5 +39,13 @@ public class Phone {
 	private PhoneType type;
 	@Column(nullable = false)
 	private String number;
+	
+	public static Phone toModel(PhoneDTO phoneDTO) {
+		Phone phone = new Phone();
+		phone.setId(phoneDTO.getId());
+		phone.setNumber(phoneDTO.getNumber());
+		phone.setType(phoneDTO.getType());
+		return phone;
+	}
 
 }
